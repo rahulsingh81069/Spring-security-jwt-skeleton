@@ -1,3 +1,29 @@
+# Role-Based Authorization — Reusable Skeleton & Mental Model
+
+> Companion to the JWT Authentication skeleton. Authentication answers "who are you"; this answers "what are you allowed to do". Use this AFTER JWT login/token verification is already working.
+
+---
+
+## The Mental Model (memorize this order)
+
+Entity already has a role field (added during Authentication setup)
+
+JwtUtil: add extractRole(token) — role was already embedded at login time
+
+JwtAuthFilter: extract the role, wrap it in SimpleGrantedAuthority,
+pass it as the 3rd argument to UsernamePasswordAuthenticationToken
+(this is the ONE line that upgrades "authenticated" into "authenticated with a role")
+
+SecurityConfig: add specific requestMatchers rules ABOVE the generic .anyRequest() rule,
+using .hasRole("X") or .hasAnyRole("X","Y")
+
+(Optional, method-level) @PreAuthorize on specific Controller/Service methods
+for finer-grained checks than URL-pattern matching allows
+
+
+
+
+
 
 **One-line analogy:** Authentication gives you an employee badge. Authorization is the rule painted on each door — "Server Room: IT staff only." The badge doesn't change; which doors open depends on what's printed on the badge.
 
