@@ -1,7 +1,8 @@
 ## JWT Login Flow
 
 ```mermaid
-flowchart LR
+%%{init: {'flowchart': {'htmlLabels': true}}}%%
+flowchart
     A[Postman<br/>POST /login] --> B[JwtAuthFilter<br/>no header, skip]
     B --> C[SecurityFilterChain<br/>permitAll matched]
     C --> D[AuthController<br/>verify password]
@@ -12,7 +13,8 @@ flowchart LR
 ## JWT Protected Request Flow
 
 ```mermaid
-flowchart LR
+%%{init: {'flowchart': {'htmlLabels': true}}}%%
+flowchart
     A[Postman<br/>Bearer token] --> B[JwtAuthFilter<br/>verify + mark authenticated]
     B --> C[SecurityFilterChain<br/>authenticated passed]
     C --> D[Controller<br/>returns data]
